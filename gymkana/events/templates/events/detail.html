@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event {{ event.title }}</title>
+    {% load static %}
+    {% load static %}
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+<body>
+    <div class="jumbotron">
+        <div class="container">
+            <h1>{{ event.title }}</h1>
+            <h2>{{ event.subtitle }}</h2>
+            <p>{{ event.start_date }} - {{ event.end_date }}</p>
+            <p>{{ event.body }}</p>
+        </div>
+    </div>
+</body>
+</html>

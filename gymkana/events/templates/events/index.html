@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Events index</title>
+    {% load static %}
+    {% load static %}
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+<body>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Ongoing & next events</div>
+        <div class="panel-body">
+        {% if next_events_list %}
+            <ul class="list-group">
+            {% for event in next_events_list %}
+                <li class="event list-group-item"><h2><a href="{% url 'events:detail' event.id %}">{{ event.title }}</a>: {{ event.start_date }} - {{ event.end_date }}</h2></li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No events are available.</p>
+        {% endif %}
+        </div>
+    </div>
+</body>
+</html>

@@ -10,3 +10,5 @@ class EventAdmin(admin.ModelAdmin):
         ('Event information', {'fields': ['start_date', 'end_date']}),
     ]
     list_display = ('title', 'subtitle', 'start_date', 'end_date')
+
+admin.site.register(Event, EventAdmin)
