@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ new.title }}</title>
+    {% load static %}
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <script language="JavaScript" type="text/javascript">
+        function confirmDelete(event) {
+            var result = confirm("Are you sure you want to delete the new {{ new.title }}?");
+            if (result) {
+                window.location.href='{% url 'news:delete' new.id %}'
+            }
+        }
+    </script>
+    <style>
+        #heading {
+            background-image: url({{ new.image.url }});
+            background-repeat: no-repeat;
+        }
+
+        #heading > h1, #heading > h2 {
+            color: lightgoldenrodyellow;
+        }
+
+        #article {
+            background-color: darkslategrey;
+        }
+
+        #article p {
+            color: lightgoldenrodyellow;
+        }
+    </style>
+</head>
+<body>
+    <div id="article" class="jumbotron">
+        <div id="heading" class="container">
+            <h1>{{ new.title }}</h1>
+            <h2> {{ new.subtitle }}</h2>
+        </div>
+        <div class="container">
+            <p>{{ new.body }}</p>
+            <p>{{ new.publish_date }}</p>
+            <div class="row">
+                <div class="col-lg-6">
+                    <button type="button" onclick="window.location.href='{% url 'news:update' new.id %}'" class="btn btn-primary">Update New</button>
+                    <button type="button" onclick="window.history.back();" class="btn btn-default">Back</button>
+                </div>
+                <div class="col-lg-6">
+                    <button type="button" onclick="return confirmDelete(this);" class="btn btn-danger">Delete</button>
+                </div>
+            </div>
+            <figure class="new_photo">
+                <img class="img-responsive" src="{{ new.image.url }}" alt="{{ new.subtitle }}">
+            </figure>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>News index</title>
+    {% load static %}
+    {% load bootstrap3 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+<body>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Latest news</div>
+        <div class="panel-body">
+    {% if latest_news_list %}
+        <div class="row">
+        {% for new in latest_news_list %}
+            <article class="new col-xs-12 col-lg-6">
+                <div class="thumbnail">
+                    <a href="{% url 'news:detail' new.id %}">
+                        <figure class="new_photo">
+                            <img class="img-responsive" src="{{ new.image.url }}" alt="{{ new.subtitle }}">
+                        </figure>
+                        <div class="caption">
+                            <h2>{{ new.title }}</h2>
+                        </div>
+                    </a>
+                </div>
+            </article>
+        {% endfor %}
+        </div>
+    {% else %}
+        <p>No news are available.</p>
+    {% endif %}
+            <div class="row">
+                <button type="button" onclick="window.location.href='{% url 'news:create' %}'" class="btn btn-primary">Write a New</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -126,5 +126,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # Media files (uploads)
-MEDIA_ROOT = os.path.abspath(os.path.dirname(__name__)) + '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+MAX_UPLOAD_SIZE = '10485760'
