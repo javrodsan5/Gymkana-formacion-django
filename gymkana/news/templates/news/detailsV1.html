@@ -1,0 +1,9 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'news/news.css' %}">
+
+    <h1>{{new.title}}</h1>
+    <h2>{{new.subtitle}}</h2>
+    <p>{{new.body}}</p>
+    <h2>{{new.publish_date}}</h2>
+    <img src="{{new.image.url}}" />

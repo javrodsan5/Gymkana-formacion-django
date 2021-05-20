@@ -1,0 +1,26 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'news/news.css' %}">
+
+{% if three_latest_news %}
+<div class="encuadre">
+    <ul>
+        {% for new in three_latest_news %}
+        <h3>{{new.title}}</h3>
+        <img width="100px" height="100px" src="{{new.image}}">
+        {% endfor %}
+    </ul>
+</div>
+{% else %}
+<p>No news are available.</p>
+{% endif %}
+
+{% if three_latest_events %}
+<ul>
+    {% for event in three_latest_events %}
+    <h2>{{ event.title }}</h2>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No events are available.</p>
+{% endif %}

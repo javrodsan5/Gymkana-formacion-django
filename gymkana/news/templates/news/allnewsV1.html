@@ -1,0 +1,14 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'news/news.css' %}">
+
+{% if news %}
+<ul>
+    {% for new in news %}
+    <h1><a href="{% url 'news:detailsV1' new.id %}">{{new.title}}</a></h1>
+    <h2>{{new.subtitle}}</h2>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No news are available.</p>
+{% endif %}
