@@ -6,4 +6,7 @@
     <h2>{{new.subtitle}}</h2>
     <p>{{new.body}}</p>
     <h2>{{new.publish_date}}</h2>
-    <img src="{{new.image.url}}" />
+    <img src="{{new.image}}" />
+    <!-- <img src="{% static '{{new.image}}' %}"> -->
+    <br>
+    <a href="{% url 'news:deletenewV1' new.id %}" onclick="return confirm('Are you sure you want to delete this?')">Borrar noticia</a>

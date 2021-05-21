@@ -1,6 +1,14 @@
 .encuadre{
-    border: 3px;
-    border-color: brown;
+    border: 4px solid #C83226;
+    border-radius: 10%;
+    background-color: ghostwhite;
+    width: fit-content;
+    padding-right: 1%;
+    margin: 1%;
+}
+
+.titulo {
+    color: indianred;
 }
 
 li {
