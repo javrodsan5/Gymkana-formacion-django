@@ -1,6 +1,6 @@
-{% load static %}
+{% extends "base_generic.html" %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'news/news.css' %}">
+<h1 style="float: right; margin-right: 30%;"><a href="{% url 'news:create_newsV1'%}"">Crear noticia</a></h1>
 
 {% if news %}
 <ul>

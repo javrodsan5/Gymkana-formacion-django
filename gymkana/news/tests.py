@@ -1,3 +1,36 @@
 from django.test import TestCase
+from .models import New
+from django.urls import reverse
+import unittest
+from django.test import Client
 
-# Create your tests here.
+
+class SimpleTest(unittest.TestCase):
+    def setUp(self):
+        self.client = Client()
+
+    def test_list_all_newsV1(self):
+        url = reverse('news:list_all_newsV1')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.context['news']), 10)
+
+    def test_create_new(self):
+        old_size = New.objects.all().count()
+        url = self.client.get(reverse('news:create_newsV1'))
+#terminar
+        new_size = New.objects.all().count()
+        self.assertIs(old_size == new_size, True)
+
+    def test_detailV1(self):
+        new = New.objects.create(title="Titulo", subtitle="subtitle")
+        response = self.client.get(reverse('news:detailsV1', args=(new.id,)))
+        self.assertEqual(response.status_code, 200)
+    
+    def test_delete_newV1(self):
+        old_size = New.objects.all().count()
+        new = New.objects.create(title="Titulo", subtitle="subtitle")
+        response = self.client.get(reverse('news:deletenewV1', args=(new.id,)))
+        new_size = New.objects.all().count()
+        self.assertEqual(response.status_code, 302)
+        self.assertIs(old_size == new_size, True)

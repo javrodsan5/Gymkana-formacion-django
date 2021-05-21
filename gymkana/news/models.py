@@ -7,7 +7,7 @@ class BaseItems(models.Model):
 
 class New(BaseItems):
     publish_date = models.DateField(auto_now_add=True)
-    image = models.ImageField(upload_to='uploads/', default='new.png')
+    image = models.ImageField(upload_to='uploads/', default='/static/news/images/new.png')
 
     def __str__(self):
         return self.title

@@ -1,18 +1,21 @@
-{% load static %}
-
-<link rel="stylesheet" type="text/css" href="{% static 'news/news.css' %}">
+{% extends "base.html" %}
 
 {% if three_latest_news %}
+<h1><a href="{% url 'news:list_all_newsV1'%}"">Noticias por funciones</a></h1>
+<h1><a href="{% url 'news:list_all_newsV2'%}"">Noticias por clase</a></h1>
+
 <div class="encuadre">
     <ul>
         {% for new in three_latest_news %}
         <h3 class="titulo">{{new.title}}</h3>
-        <img width="100px" height="100px" src="{{new.image}}">
+        <img width="100px" height="100px" src="{{new.image.url}}">
         {% endfor %}
     </ul>
 </div>
+
 {% else %}
 <p>No news are available.</p>
+
 {% endif %}
 
 {% if three_latest_events %}

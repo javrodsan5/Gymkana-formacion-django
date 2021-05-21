@@ -6,14 +6,6 @@ from django.views import generic
 from PIL import Image
 from .forms import NewForm
 from django.http import HttpResponseRedirect
-from django.utils import timezone
-
-
-def index(request):
-    three_latest_news = New.objects.order_by('-publish_date')[:3]
-    three_latest_events = Event.objects.order_by('-end_date')[:3]
-
-    return render(request, 'news/index.html', {'three_latest_news': three_latest_news, 'three_latest_events': three_latest_events})
 
 
 def noticiasV1(request):
@@ -48,13 +40,14 @@ def check_imagen(image):
 
 def createV1(request):
     if request.method == 'POST':
-        form = NewForm(request.POST)
+        form = NewForm(request.POST, request.FILES)
+        print(request.FILES)
         if form.is_valid():
             new = New()
             new.title = form.cleaned_data['title']
             new.subtitle = form.cleaned_data['subtitle']
             new.body = form.cleaned_data['body']
-            #new.image = request.POST['iamge']
+            new.image = form.cleaned_data['image']
             new.save()
             return HttpResponseRedirect('/news/v1/allnews')
     else:
