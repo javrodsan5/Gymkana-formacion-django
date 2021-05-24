@@ -1,14 +1,20 @@
-{% extends "base_generic.html" %}
+{% extends "baseDjango/base.html" %}
+
+{% block title %} Noticias V1
+{% endblock %}
+
+{% block contenido %}
 
 <h1 style="float: right; margin-right: 30%;"><a href="{% url 'news:create_newsV1'%}"">Crear noticia</a></h1>
 
 {% if news %}
 <ul>
     {% for new in news %}
-    <h1><a href="{% url 'news:detailsV1' new.id %}">{{new.title}}</a></h1>
-    <h2>{{new.subtitle}}</h2>
-    {% endfor %}
+    <h1><a href=" {% url 'news:detailsV1' new.id %}">{{new.title}}</a></h1>
+<h2>{{new.subtitle}}</h2>
+{% endfor %}
 </ul>
 {% else %}
 <p>No news are available.</p>
 {% endif %}
+{% endblock %}

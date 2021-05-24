@@ -1,7 +1,7 @@
-from django import forms
+from django.forms import ModelForm
+from news.models import New
 
-class NewForm(forms.Form):
-    title = forms.CharField(label='Título', max_length=20)
-    subtitle = forms.CharField(label='Subtítulo', max_length=20)
-    body = forms.CharField(label='Cuerpo')
-    image = forms.ImageField(label='Imagen de la noticia')
+class NewForm(ModelForm):
+    class Meta:
+        model = New
+        fields = ['title', 'subtitle', 'body', 'image']

@@ -16,6 +16,7 @@ def noticiasV1(request):
 
 def detalle_noticiaV1(request, new_id):
     new = get_object_or_404(New, pk=new_id)
+    pordefecto = False
     return render(request, 'news/detailsV1.html', {'new': new})
 
 
@@ -23,6 +24,20 @@ def borrar_noticiaV1(request, new_id):
     new = get_object_or_404(New, pk=new_id)
     new.delete()
     return HttpResponseRedirect('/news/v1/allnews')
+
+
+def editar_noticiaV1(request, new_id):
+    new = get_object_or_404(New, pk=new_id)
+    if request.method == 'PUT':
+        form = NewForm(request.POST, request.FILES)
+        if form.is_valid():
+            # if check_imagen(form.cleaned_data['image']):
+            form.save()
+            return HttpResponseRedirect('/news/v1/allnews')
+    else:
+        form = NewForm()
+
+    return render(request, 'news/updateV1.html', {'form': form})
 
 
 def check_imagen(image):
@@ -41,14 +56,16 @@ def check_imagen(image):
 def createV1(request):
     if request.method == 'POST':
         form = NewForm(request.POST, request.FILES)
-        print(request.FILES)
         if form.is_valid():
-            new = New()
-            new.title = form.cleaned_data['title']
-            new.subtitle = form.cleaned_data['subtitle']
-            new.body = form.cleaned_data['body']
-            new.image = form.cleaned_data['image']
-            new.save()
+            img = form.cleaned_data['image']
+            if img:
+                print("jpg" in img)
+                print("png" in img)
+
+                if ".png" in img or ".jpg" in img:
+                    form.save()
+                else:
+                    raise ValidationError("Debe ser png o jpg")
             return HttpResponseRedirect('/news/v1/allnews')
     else:
         form = NewForm()
@@ -70,3 +87,14 @@ class detalle_noticiaV2(generic.DetailView):
 
     model = New
     template_name = 'news/detailsV2.html'
+
+class crear_noticiaV2(generic.CreateView):
+
+    model = New
+    template_name = 'news/createV2.html'
+    fields = ['title', 'subtitle', 'body', 'image']
+    success_url ="/news/v2/allnews"
+
+class borrar_noticiaV2(generic.DeleteView):
+    model = New
+    success_url ="/news/v2/allnews"

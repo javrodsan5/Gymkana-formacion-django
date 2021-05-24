@@ -1,9 +1,22 @@
-{% load static %}
+{% extends "baseDjango/base.html" %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'news/news.css' %}">
+{% block title %} Detalles V1
+{% endblock %}
 
-    <h1>{{new.title}}</h1>
-    <h2>{{new.subtitle}}</h2>
-    <p>{{new.body}}</p>
-    <h2>{{new.publish_date}}</h2>
-    <img src="{{new.image}}" />
+{% block contenido %}
+
+<h1>{{new.title}}</h1>
+<h2>{{new.subtitle}}</h2>
+<p>{{new.body}}</p>
+<h2>{{new.publish_date}}</h2>
+{% if new.image == "/static/news/images/new.png" %}
+<img width="100px" height="100px" style="padding: 2%;" src="{{new.image}}">
+{% else %}
+<img width="100px" height="100px" style="padding: 2%;" src="{{new.image.url}}">
+{% endif %}
+<div class="iconos">
+    <a href="{% url 'news:deletenewV2' new.id %}"><i class="fa fa-trash-o fa-2x"
+            aria-hidden="true"></i></a>
+</div>
+
+{% endblock %}

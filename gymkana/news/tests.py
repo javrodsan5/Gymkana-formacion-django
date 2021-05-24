@@ -1,19 +1,19 @@
 from django.test import TestCase
 from .models import New
 from django.urls import reverse
-import unittest
 from django.test import Client
 
 
-class SimpleTest(unittest.TestCase):
+class SimpleTest(TestCase):
     def setUp(self):
         self.client = Client()
+        New.objects.create(title="Titulo", subtitle="subtitle")
 
     def test_list_all_newsV1(self):
         url = reverse('news:list_all_newsV1')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.context['news']), 10)
+        self.assertEqual(len(response.context['news']), 1)
 
     def test_create_new(self):
         old_size = New.objects.all().count()
@@ -23,7 +23,7 @@ class SimpleTest(unittest.TestCase):
         self.assertIs(old_size == new_size, True)
 
     def test_detailV1(self):
-        new = New.objects.create(title="Titulo", subtitle="subtitle")
+        new = New.objects.get(id=1)
         response = self.client.get(reverse('news:detailsV1', args=(new.id,)))
         self.assertEqual(response.status_code, 200)
     

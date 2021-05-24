@@ -7,6 +7,16 @@
     margin: 1%;
 }
 
+.iconos{
+    margin: 1%;
+    padding: 1%;
+}
+
+.fotoDetalle{
+    width: 400px;
+    height: 200px;
+}
+
 .titulo {
     color: indianred;
 }

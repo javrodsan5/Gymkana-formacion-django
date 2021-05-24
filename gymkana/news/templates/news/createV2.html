@@ -9,10 +9,10 @@
 
 {% block contenido %}
 
-<form action="/news/v1/news/create" method="post" enctype="multipart/form-data">
+<form action="/news/v2/news/create" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    {{form.errors}}
+    {{ form.errors }}
     <input type="submit" value="OK">
 </form>
 {% endblock %}
