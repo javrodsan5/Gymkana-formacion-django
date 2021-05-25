@@ -1,0 +1,13 @@
+{% extends "baseDjango/base.html" %}
+
+{% block title %} Confirma borrado V2
+{% endblock %}
+
+{% block contenido %}
+<form method="post">{% csrf_token %}
+
+    <p>Are you sure you want to delete "{{ object }}"?</p>
+
+    <input type="submit" value="Confirm">
+</form>
+{% endblock %}

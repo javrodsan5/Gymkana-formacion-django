@@ -1,0 +1,21 @@
+{% extends "baseDjango/base.html" %}
+
+{% block title %} Detalles Evento V2
+{% endblock %}
+
+{% block contenido %}
+<div class="encuadre">
+    <h1>{{event.title}}</h1>
+    <h2>{{event.subtitle}}</h2>
+    <p>{{event.body}}</p>
+    <h2>{{event.start_date}}</h2>
+    <h2>{{event.end_date}}</h2>
+    <div class="iconos">
+        <a href="{% url 'events:event_updateV2' event.id %}" style="float: right; padding-bottom: 2%;"><i
+                class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a>
+        <a href="{% url 'events:event_deleteV2' event.id %}"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a>
+    </div>
+
+</div>
+
+{% endblock %}

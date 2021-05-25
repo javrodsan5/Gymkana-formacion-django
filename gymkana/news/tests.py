@@ -34,3 +34,15 @@ class SimpleTest(TestCase):
         new_size = New.objects.all().count()
         self.assertEqual(response.status_code, 302)
         self.assertIs(old_size == new_size, True)
+
+    def test_delete_newV2(self):
+        old_size = New.objects.all().count()
+        print(old_size)
+        new = New.objects.create(title="Titulo", subtitle="subtitle")
+        actual_size = New.objects.all().count()
+        print(actual_size)
+        response = self.client.get(reverse('news:deletenewV2', args=(new.id,)))
+        new_size = New.objects.all().count()
+        print( new_size)
+        self.assertEqual(response.status_code, 200)
+        self.assertIs(old_size == new_size, True)

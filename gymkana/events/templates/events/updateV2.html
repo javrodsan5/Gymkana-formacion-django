@@ -1,18 +1,18 @@
-{% extends "news/createV1.html" %}
+{% extends "baseDjango/base.html" %}
 
-{% block title %} Editar noticia V1
+{% block title %} Actualizar evento V2
 {% endblock %}
 
 {% block principal %}
-<h1>Edita la noticia</h1>
+<h1>Actualiza el evento</h1>
 {% endblock %}
 
 {% block contenido %}
 
-<form method="post" enctype="multipart/form-data">
+<form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    {{form.errors}}
+    <h3 style="color: black;">{{form.errors}}</h3>
     <input type="submit" value="OK">
 </form>
 {% endblock %}

@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.exceptions import ValidationError
+
 
 class BaseItems(models.Model):
     title = models.CharField(max_length=20, blank=False)
@@ -11,3 +13,7 @@ class Event(BaseItems):
 
     def __str__(self):
         return self.title
+    
+    def check_end_after_start(self):
+        if self.end_date < self.start_date:
+            raise ValidationError("The end date must be after the start date")

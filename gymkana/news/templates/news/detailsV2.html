@@ -1,22 +1,24 @@
 {% extends "baseDjango/base.html" %}
 
-{% block title %} Detalles V1
+{% block title %} Detalles V2
 {% endblock %}
 
 {% block contenido %}
-
-<h1>{{new.title}}</h1>
-<h2>{{new.subtitle}}</h2>
-<p>{{new.body}}</p>
-<h2>{{new.publish_date}}</h2>
-{% if new.image == "/static/news/images/new.png" %}
-<img width="100px" height="100px" style="padding: 2%;" src="{{new.image}}">
-{% else %}
-<img width="100px" height="100px" style="padding: 2%;" src="{{new.image.url}}">
-{% endif %}
-<div class="iconos">
-    <a href="{% url 'news:deletenewV2' new.id %}"><i class="fa fa-trash-o fa-2x"
-            aria-hidden="true"></i></a>
+<div class="encuadre">
+    <h1>{{new.title}}</h1>
+    <h2>{{new.subtitle}}</h2>
+    <p>{{new.body}}</p>
+    <h2>{{new.publish_date}}</h2>
+    {% if new.image == "/static/news/images/new.png" %}
+    <img width="100px" height="100px" style="padding: 2%;" src="{{new.image}}">
+    {% else %}
+    <img width="100px" height="100px" style="padding: 2%;" src="{{new.image.url}}">
+    {% endif %}
+    <div class="iconos">
+        <a href="{% url 'news:updatenewV2' new.id %}" style="float: right; padding-bottom: 2%;"><i
+                class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a>
+        <a href="{% url 'news:deletenewV2' new.id %}"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a>
+    </div>
 </div>
 
 {% endblock %}

@@ -13,4 +13,5 @@ urlpatterns = [
     path('v2/allnews', views.noticiasV2.as_view(), name='list_all_newsV2'),
     path('v2/news/create', views.crear_noticiaV2.as_view(), name='create_newsV2'),
     path('v2/<int:pk>/', views.detalle_noticiaV2.as_view(), name='detailsV2'),
-    path('v2/<int:pk>/delete', views.borrar_noticiaV2.as_view(), name='deletenewV2'), ]
+    path('v2/<int:pk>/delete', views.borrar_noticiaV2.as_view(), name='deletenewV2'),
+    path('v2/<int:pk>/update', views.actualizar_noticiaV2.as_view(), name='updatenewV2'), ]

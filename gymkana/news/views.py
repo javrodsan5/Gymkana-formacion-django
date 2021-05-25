@@ -1,5 +1,4 @@
 from django.core.exceptions import ValidationError
-from events.models import Event
 from django.shortcuts import get_object_or_404, render
 from .models import New
 from django.views import generic
@@ -16,7 +15,6 @@ def noticiasV1(request):
 
 def detalle_noticiaV1(request, new_id):
     new = get_object_or_404(New, pk=new_id)
-    pordefecto = False
     return render(request, 'news/detailsV1.html', {'new': new})
 
 
@@ -28,12 +26,11 @@ def borrar_noticiaV1(request, new_id):
 
 def editar_noticiaV1(request, new_id):
     new = get_object_or_404(New, pk=new_id)
-    if request.method == 'PUT':
-        form = NewForm(request.POST, request.FILES)
-        if form.is_valid():
-            # if check_imagen(form.cleaned_data['image']):
-            form.save()
-            return HttpResponseRedirect('/news/v1/allnews')
+    form = NewForm(request.POST, request.FILES, instance=new)
+    if form.is_valid():
+        # if check_imagen(form.cleaned_data['image']):
+        form.save()
+        return HttpResponseRedirect('/news/v1/allnews')
     else:
         form = NewForm()
 
@@ -57,15 +54,15 @@ def createV1(request):
     if request.method == 'POST':
         form = NewForm(request.POST, request.FILES)
         if form.is_valid():
-            img = form.cleaned_data['image']
-            if img:
-                print("jpg" in img)
-                print("png" in img)
+            # img = form.cleaned_data['image']
+            # if img:
+            #     print("jpg" in img)
+            #     print("png" in img)
 
-                if ".png" in img or ".jpg" in img:
-                    form.save()
-                else:
-                    raise ValidationError("Debe ser png o jpg")
+            #     if ".png" in img or ".jpg" in img:
+            form.save()
+            # else:
+            #     raise ValidationError("Debe ser png o jpg")
             return HttpResponseRedirect('/news/v1/allnews')
     else:
         form = NewForm()
@@ -88,13 +85,23 @@ class detalle_noticiaV2(generic.DetailView):
     model = New
     template_name = 'news/detailsV2.html'
 
+
 class crear_noticiaV2(generic.CreateView):
 
     model = New
     template_name = 'news/createV2.html'
     fields = ['title', 'subtitle', 'body', 'image']
-    success_url ="/news/v2/allnews"
+    success_url = "/news/v2/allnews"
+
+
+class actualizar_noticiaV2(generic.UpdateView):
+
+    model = New
+    template_name = 'news/updateV2.html'
+    fields = ['title', 'subtitle', 'body', 'image']
+    success_url = "/news/v2/allnews"
+
 
 class borrar_noticiaV2(generic.DeleteView):
     model = New
-    success_url ="/news/v2/allnews"
+    success_url = "/news/v2/allnews"
