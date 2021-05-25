@@ -54,21 +54,13 @@ def createV1(request):
     if request.method == 'POST':
         form = NewForm(request.POST, request.FILES)
         if form.is_valid():
-            # img = form.cleaned_data['image']
-            # if img:
-            #     print("jpg" in img)
-            #     print("png" in img)
-
-            #     if ".png" in img or ".jpg" in img:
             form.save()
-            # else:
-            #     raise ValidationError("Debe ser png o jpg")
             return HttpResponseRedirect('/news/v1/allnews')
     else:
         form = NewForm()
 
     return render(request, 'news/createV1.html', {'form': form})
-
+    
 # --------------------------------V2------------------------------------------------
 
 

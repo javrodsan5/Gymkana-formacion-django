@@ -4,6 +4,7 @@ from django.core.exceptions import ValidationError
 
 
 class NewForm(ModelForm):
-    model = New
-    fields = ['title', 'subtitle', 'body', 'image']
+    class Meta:
+        model = New
+        fields = ['title', 'subtitle', 'body', 'image']
 
