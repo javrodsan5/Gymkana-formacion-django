@@ -4,8 +4,8 @@
 {% endblock %}
 
 {% block contenido %}
-
-<h1 style="float: right; margin-right: 30%;"><a href="{% url 'events:event_createV2'%}"">Crear evento</a></h1>
+<h1 style="float: right; margin-right: 30%;"><a href="/" class="link-danger">Volver al inicio</a></h1>
+<h1 style="float: right; margin-right: 2%;"><a href="{% url 'events:event_createV2'%}"">Crear evento</a></h1>
 
 {% if events %}
 <div class=" encuadre">

@@ -1,6 +1,6 @@
 from django.db import models
 from django.core.exceptions import ValidationError
-
+from django.utils.translation import ugettext as _
 
 class BaseItems(models.Model):
     title = models.CharField(max_length=20, blank=False)
@@ -14,6 +14,6 @@ class Event(BaseItems):
     def __str__(self):
         return self.title
     
-    def check_end_after_start(self):
+    def clean(self):
         if self.end_date < self.start_date:
-            raise ValidationError("The end date must be after the start date")
+            raise ValidationError({'end_date': _('The end date must be after the start date')})

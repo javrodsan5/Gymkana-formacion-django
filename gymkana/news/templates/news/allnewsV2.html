@@ -4,8 +4,8 @@
 {% endblock %}
 
 {% block contenido %}
-
-<h1 style="float: right; margin-right: 30%;"><a href="{% url 'news:create_newsV2'%}"">Crear noticia</a></h1>
+<h1 style="float: right; margin-right: 30%;"><a href="/" class="link-danger">Volver al inicio</a></h1>
+<h1 style="float: right; margin-right: 2%;"><a href="{% url 'news:create_newsV2'%}"">Crear noticia</a></h1>
 
 {% if news %}
 <div class=" encuadre">

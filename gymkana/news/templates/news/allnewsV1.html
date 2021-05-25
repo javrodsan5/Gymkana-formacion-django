@@ -5,16 +5,18 @@
 
 {% block contenido %}
 
-<h1 style="float: right; margin-right: 30%;"><a href="{% url 'news:create_newsV1'%}"">Crear noticia</a></h1>
-
+<h1 style="float: right; margin-right: 30%;"><a href="/" class="link-danger">Volver al inicio</a></h1>
+<h1 style="float: right; margin-right: 2%;"><a href="{% url 'news:create_newsV1'%}" class="link-primary">Crear noticia</a></h1>
 {% if news %}
-<ul>
-    {% for new in news %}
-    <h1><a href=" {% url 'news:detailsV1' new.id %}">{{new.title}}</a></h1>
-<h2>{{new.subtitle}}</h2>
-{% endfor %}
-</ul>
-{% else %}
-<p>No news are available.</p>
-{% endif %}
-{% endblock %}
+<div class=" encuadre">
+        <ul>
+            {% for new in news %}
+            <h1><a href=" {% url 'news:detailsV1' new.id %}" class="link-success">{{new.title}}</a></h1>
+            <h2>{{new.subtitle}}</h2>
+            {% endfor %}
+        </ul>
+        </div>
+        {% else %}
+        <p>No news are available.</p>
+        {% endif %}
+        {% endblock %}

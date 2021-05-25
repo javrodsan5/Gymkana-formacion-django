@@ -13,8 +13,27 @@
     <div class="iconos">
         <a href="{% url 'events:event_updateV2' event.id %}" style="float: right; padding-bottom: 2%;"><i
                 class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a>
-        <a href="{% url 'events:event_deleteV2' event.id %}"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a>
+        <a href="{% url 'events:event_deleteV2' event.id %}" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a>
     </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
 </div>
 
