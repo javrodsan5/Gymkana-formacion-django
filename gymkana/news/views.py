@@ -72,7 +72,7 @@ class crear_noticiaV2(generic.CreateView):
 
     model = New
     template_name = 'news/createV2.html'
-    fields = ['title', 'subtitle', 'body', 'image']
+    form_class = NewForm
     success_url = "/news/v2/allnews"
 
 
@@ -80,7 +80,7 @@ class actualizar_noticiaV2(generic.UpdateView):
 
     model = New
     template_name = 'news/updateV2.html'
-    fields = ['title', 'subtitle', 'body', 'image']
+    form_class = NewForm
     success_url = "/news/v2/allnews"
 
 
