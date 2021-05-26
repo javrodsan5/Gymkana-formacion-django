@@ -13,6 +13,11 @@
     padding: 1%;
 }
 
+.formulario li{
+    color: red;
+}
+
+
 .fotoDetalle{
     width: 400px;
     height: 200px;
@@ -23,5 +28,5 @@
 }
 
 li {
-    color: white;
+    color: red;
 }
