@@ -12,7 +12,8 @@ class NewForm(ModelForm):
 
     def clean_image(self):
         image = self.cleaned_data.get('image', False)
-        if isinstance(image, InMemoryUploadedFile) or isinstance(image, ImageFieldFile):
+
+        if isinstance(image, InMemoryUploadedFile) or isinstance(image, ImageFieldFile) or isinstance(image, str):
             return image
         else:
             if ("/png" not in image.content_type and "/jpg" not in image.content_type) or image.size > 10*1024*1024:
