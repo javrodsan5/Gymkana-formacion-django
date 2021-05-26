@@ -12,8 +12,7 @@
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
-        <h5 style="color: red;">{{message}}</h3>
-        <input type="submit" value="OK">
+            <input type="submit" value="OK">
     </form>
 </div>
 {% endblock %}

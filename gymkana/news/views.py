@@ -25,13 +25,18 @@ def borrar_noticiaV1(request, new_id):
 
 
 def editar_noticiaV1(request, new_id):
+    # import ipdb
+    # ipdb.set_trace()
     new = get_object_or_404(New, pk=new_id)
-    form = NewForm(request.POST, request.FILES, instance=new)
-    if form.is_valid():
-        form.save()
-        return HttpResponseRedirect('/news/v1/allnews')
+    if request.method == 'POST':
+        form = NewForm(request.POST, request.FILES, instance=new)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect("/news/v1/allnews")
     else:
-        form = NewForm()
+        data = {'title': new.title, 'subtitle': new.subtitle,
+                'body': new.body, 'image': new.image}
+        form = NewForm(data, request.POST, request.FILES, instance=new)
 
     return render(request, 'news/updateV1.html', {'form': form})
 
@@ -41,11 +46,9 @@ def createV1(request):
         form = NewForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-
             return HttpResponseRedirect('/news/v1/allnews')
     else:
         form = NewForm()
-
     return render(request, 'news/createV1.html', {'form': form})
 
 # --------------------------------V2------------------------------------------------
