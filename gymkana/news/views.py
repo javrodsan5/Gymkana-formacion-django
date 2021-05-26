@@ -28,7 +28,6 @@ def editar_noticiaV1(request, new_id):
     new = get_object_or_404(New, pk=new_id)
     form = NewForm(request.POST, request.FILES, instance=new)
     if form.is_valid():
-        # if check_imagen(form.cleaned_data['image']):
         form.save()
         return HttpResponseRedirect('/news/v1/allnews')
     else:
@@ -37,30 +36,18 @@ def editar_noticiaV1(request, new_id):
     return render(request, 'news/updateV1.html', {'form': form})
 
 
-def check_imagen(image):
-    if image._size < 10485760:
-        img = Image.open(image)
-        img.verify()
-        if img.format in ('png', 'jpg'):
-            return True
-        else:
-            raise ValidationError(
-                "Unsupported image type. Please upload jpg or png")
-    else:
-        raise ValidationError("The image size must be under 10MB")
-
-
 def createV1(request):
     if request.method == 'POST':
         form = NewForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+
             return HttpResponseRedirect('/news/v1/allnews')
     else:
         form = NewForm()
 
     return render(request, 'news/createV1.html', {'form': form})
-    
+
 # --------------------------------V2------------------------------------------------
 
 
