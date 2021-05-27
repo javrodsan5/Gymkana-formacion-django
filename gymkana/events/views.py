@@ -3,7 +3,6 @@ from django.shortcuts import get_object_or_404, render
 from .models import Event
 from django.views import generic
 from PIL import Image
-from .forms import EventForm
 from django.http import HttpResponseRedirect
 
 class eventos(generic.ListView):
