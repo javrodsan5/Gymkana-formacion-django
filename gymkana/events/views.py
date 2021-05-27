@@ -37,3 +37,6 @@ class actualizar_eventoV2(generic.UpdateView):
 class borrar_eventoV2(generic.DeleteView):
     model = Event
     success_url = "/events/v2/allevents"
+
+    def get(self, *args, **kwargs):
+        return self.post(*args, **kwargs)

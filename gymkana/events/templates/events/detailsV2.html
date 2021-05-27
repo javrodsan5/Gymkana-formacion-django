@@ -5,35 +5,37 @@
 
 {% block contenido %}
 <div class="encuadre">
-    <h1>{{event.title}}</h1>
-    <h2>{{event.subtitle}}</h2>
-    <p>{{event.body}}</p>
-    <h2>{{event.start_date}}</h2>
-    <h2>{{event.end_date}}</h2>
-    <div class="iconos">
-        <a href="{% url 'events:event_updateV2' event.id %}" style="float: right; padding-bottom: 2%;"><i
-                class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a>
-        <a href="{% url 'events:event_deleteV2' event.id %}" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a>
-    </div>
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              ...
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-          </div>
+  <h1>{{event.title}}</h1>
+  <h2>{{event.subtitle}}</h2>
+  <p>{{event.body}}</p>
+  <h2>{{event.start_date}}</h2>
+  <h2>{{event.end_date}}</h2>
+  <div class="iconos">
+    <a href="{% url 'events:event_updateV2' event.id %}" style="float: right; padding-bottom: 2%;"><i
+        class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a>
+    <a href="#" onclick="document.getElementById('id01').style.display='block'"><i class="fa fa-trash-o fa-2x"
+        aria-hidden="true"></i></a>
+  </div>
+
+  <div id="id01" class="modal">
+    <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal"></span>
+    <div class="modal-content" style="background-color: bisque; margin: 10% 0% 0% 25%; width: 50%;">
+      <div class="container" style="position: relative; width: 50%">
+        <h1>Borrar Evento</h1>
+        <p>¿Estás seguro de que deseas borrarlo?</p>
+
+        <div class="clearfix">
+          <form method="GET" action="{% url 'events:event_detailsV2' event.id %}">
+            <a href="{% url 'events:event_detailsV2' event.id %}"><button>Cancel</button></a>
+          </form>
+          <form method="POST" action="{% url 'events:event_deleteV2' event.id  %}">
+            {% csrf_token %}
+            <button formaction="{% url 'events:event_deleteV2' event.id %}" class="btn">Delete</button>
+          </form>
         </div>
       </div>
+    </div>
+  </div>
 
 </div>
 
