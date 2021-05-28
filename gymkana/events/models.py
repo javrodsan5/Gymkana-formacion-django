@@ -15,5 +15,6 @@ class Event(BaseItems):
         return self.title
     
     def clean(self):
-        if self.end_date < self.start_date:
-            raise ValidationError({'end_date': _('The end date must be after the start.')})
+        if self.start_date and self.end_date:
+            if self.end_date < self.start_date:
+                raise ValidationError({'end_date': _('The end date must be after the start.')})
