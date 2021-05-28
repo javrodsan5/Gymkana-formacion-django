@@ -35,6 +35,8 @@ INSTALLED_APPS = [
     'news.apps.NewsConfig',
     'events.apps.EventsConfig',
     'baseDjango.apps.BasedjangoConfig',
+    'rest_framework',
+    'api.apps.ApiConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
