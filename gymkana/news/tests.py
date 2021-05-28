@@ -3,11 +3,14 @@ from django.test import TestCase
 from .models import New
 from django.urls import reverse
 from django.test import Client
+from django.conf import settings
+import tempfile
 
 
 class SimpleTest(TestCase):
     def setUp(self):
         self.client = Client()
+        settings.MEDIA_ROOT = tempfile.mkdtemp()
         New.objects.create(title="Titulo", subtitle="subtitle")
         New.objects.create(title="BorrarV1", subtitle="subtitle")
         New.objects.create(title="BorrarV2", subtitle="subtitle")
@@ -45,7 +48,7 @@ class SimpleTest(TestCase):
 
     def test_V1_create_new_with_image(self):
         imagen = SimpleUploadedFile(name='foto.jpg', content=open(
-            '/home/jsantiago/Descargas/foto.jpg', 'rb').read(), content_type='image/jpg')
+            './testSampleImages/foto.jpg', 'rb').read(), content_type='image/jpg')
         data = {"title": "Super Test", "subtitle": "Subtitulo",
                 "body": "Cuerpo", "image": imagen}
         response = self.client.get('/news/v1/news/create')
@@ -59,7 +62,7 @@ class SimpleTest(TestCase):
 
     def test_V1_create_new_with_bad_image(self):
         imagen = SimpleUploadedFile(name='8MB.jpg', content=open(
-            '/home/jsantiago/Descargas/8MB.jpeg', 'rb').read(), content_type='image/jpeg')
+            './testSampleImages/8MB.jpeg', 'rb').read(), content_type='image/jpeg')
         data = {"title": "Super Test", "subtitle": "Subtitulo",
                 "body": "Cuerpo", "image": imagen}
         response = self.client.get('/news/v1/news/create')
@@ -73,7 +76,7 @@ class SimpleTest(TestCase):
 
     def test_V1_create_new_with_bad_image_pdf_as_png(self):
         imagen = SimpleUploadedFile(name='Trabajando con Git.png', content=open(
-            '/home/jsantiago/Descargas/Trabajando con Git.png', 'rb').read(), content_type='image/png')
+            './testSampleImages/Trabajando con Git.png', 'rb').read(), content_type='image/png')
         data = {"title": "Super Test", "subtitle": "Subtitulo",
                 "body": "Cuerpo", "image": imagen}
         response = self.client.get('/news/v1/news/create')
@@ -99,7 +102,7 @@ class SimpleTest(TestCase):
 
     def test_V1_create_new_title_too_large(self):
         imagen = SimpleUploadedFile(name='foto.jpg', content=open(
-            '/home/jsantiago/Descargas/foto.jpg', 'rb').read(), content_type='image/jpg')
+            './testSampleImages/foto.jpg', 'rb').read(), content_type='image/jpg')
         data = {"title": "Test con titulo demasiado largo", "subtitle": "Subtitulo",
                 "body": "Cuerpo", "image": imagen}
         response = self.client.get('/news/v1/news/create')
@@ -114,7 +117,7 @@ class SimpleTest(TestCase):
 
     def test_V1_create_new_subtitle_too_large(self):
         imagen = SimpleUploadedFile(name='foto.jpg', content=open(
-            '/home/jsantiago/Descargas/foto.jpg', 'rb').read(), content_type='image/jpg')
+            './testSampleImages/foto.jpg', 'rb').read(), content_type='image/jpg')
         data = {"title": "Test", "subtitle": "Test con subtitulo demasiado largo",
                 "body": "Cuerpo", "image": imagen}
         response = self.client.get('/news/v1/news/create')
@@ -129,7 +132,7 @@ class SimpleTest(TestCase):
 
     def test_V1_update_new_complete(self):
         imagen = SimpleUploadedFile(name='foto.jpg', content=open(
-            '/home/jsantiago/Descargas/foto.jpg', 'rb').read(), content_type='image/jpg')
+            './testSampleImages/foto.jpg', 'rb').read(), content_type='image/jpg')
         data = {"title": "Actualizado", "subtitle": "Subtitulo",
                 "body": "Cuerpo", "image": imagen}
         response = self.client.get('/news/v1/1/update')
@@ -155,7 +158,7 @@ class SimpleTest(TestCase):
 
     def test_V1_update_new_title_too_large(self):
         imagen = SimpleUploadedFile(name='foto.jpg', content=open(
-            '/home/jsantiago/Descargas/foto.jpg', 'rb').read(), content_type='image/jpg')
+            './testSampleImages/foto.jpg', 'rb').read(), content_type='image/jpg')
         data = {"title": "Actualizado pero demasiado largo", "subtitle": "Subtitulo",
                 "body": "Cuerpo", "image": imagen}
         response = self.client.get('/news/v1/1/update')
@@ -172,7 +175,7 @@ class SimpleTest(TestCase):
 
     def test_V2_create_new_complete(self):
         imagen = SimpleUploadedFile(name='foto.jpg', content=open(
-            '/home/jsantiago/Descargas/foto.jpg', 'rb').read(), content_type='image/jpg')
+            './testSampleImages/foto.jpg', 'rb').read(), content_type='image/jpg')
         data = {"title": "Super Test", "subtitle": "Subtitulo",
                 "body": "Cuerpo", "image": imagen}
         response = self.client.get('/news/v2/news/create')
@@ -198,7 +201,7 @@ class SimpleTest(TestCase):
 
     def test_V2_create_new_title_too_large(self):
         imagen = SimpleUploadedFile(name='foto.jpg', content=open(
-            '/home/jsantiago/Descargas/foto.jpg', 'rb').read(), content_type='image/jpg')
+            './testSampleImages/foto.jpg', 'rb').read(), content_type='image/jpg')
 
         data = {"title": "Test con titulo demasiado largo", "subtitle": "Subtitulo",
                 "body": "Cuerpo", "image": imagen}
@@ -214,7 +217,7 @@ class SimpleTest(TestCase):
 
     def test_V2_create_new_subtitle_too_large(self):
         imagen = SimpleUploadedFile(name='foto.jpg', content=open(
-            '/home/jsantiago/Descargas/foto.jpg', 'rb').read(), content_type='image/jpg')
+            './testSampleImages/foto.jpg', 'rb').read(), content_type='image/jpg')
         data = {"title": "Test", "subtitle": "Test con subtitulo demasiado largo",
                 "body": "Cuerpo", "image": imagen}
         response = self.client.get('/news/v2/news/create')
