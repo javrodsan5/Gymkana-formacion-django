@@ -5,13 +5,45 @@
 
 {% block principal %}
 <h1>Actualiza el evento</h1>
-{% endblock %}
 
-{% block contenido %}
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script>
+        $(function () {
+            $("#id_start_date").datepicker({
+                dateFormat: "yy-mm-dd",
+                defaultDate: "+1w",
+                changeMonth: true,
+                numberOfMonths: 2,
+                onClose: function (selectedDate) {
+                    $("#id_start_date").datepicker("option", "minDate", selectedDate);
+                }
+            });
+        });
+    </script>
+    <script>
+        $(function () {
+            $("#id_end_date").datepicker({
+                dateFormat: "yy-mm-dd",
+                defaultDate: "+1w",
+                changeMonth: true,
+                numberOfMonths: 2,
+                onClose: function (selectedDate) {
+                    $("#id_end_date").datepicker("option", "minDate", selectedDate);
+                }
+            });
+        });
+    </script>
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="OK">
-</form>
-{% endblock %}
+    {% endblock %}
+
+    {% block contenido %}
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="OK">
+    </form>
+    {% endblock %}
