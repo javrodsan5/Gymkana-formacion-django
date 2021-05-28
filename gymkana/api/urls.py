@@ -3,6 +3,6 @@ from . import views
 
 app_name = 'api'
 urlpatterns = [
-    path('events/', views.event_list),
-    path('events/<int:pk>/', views.event_detail),
+    path('events/', views.EventList.as_view(),  name='listApi'),
+    path('events/<int:pk>/', views.EventDetail.as_view(), name='detailsApi'),
 ]
